@@ -17,16 +17,16 @@ func main() {
 		images []*image.Paletted
 		delays []int
 	)
-	var datas [side]sort.Data
+	var ci [side][]uint8
 	palette := rgbah.GetPalette(side)
 
 	img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
 	// shuffle
 	for y := 0; y < side; y++ {
-		datas[y].Pixels = make([]rgbah.RGBAH, side)
+		ci[y] = make([]uint8, side)
 		for x, i := range rand.Perm(side) {
-			datas[y].Pixels[x] = palette[i].(rgbah.RGBAH)
-			img.Set(x, y, palette[i])
+			ci[y][x] = uint8(i)
+			img.SetColorIndex(x, y, uint8(i))
 		}
 	}
 	images = append(images, img)
@@ -38,21 +38,21 @@ func main() {
 
 	// sort
 	for y := 0; y < side; y++ {
-		go datas[y].SelectionSort(frame, set, done)
+		go sort.SelectionSort(ci[y], frame, set, done)
 	}
 	
 	// set
 	go func() {
-		for a := 0; ; a++ {
+		for {
 			img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
 			for i := 0; i < side; i++ {
 				<-frame
 			}
-			fmt.Println(a, "frame")
+			fmt.Print(".")
 
 			for y := 0; y < side; y++ {
 				for x := 0; x < side; x++ {
-					img.Set(x, y, datas[y].Pixels[x])
+					img.SetColorIndex(x, y, ci[y][x])
 				}
 			}
 
@@ -68,6 +68,7 @@ func main() {
 	for i := 0; i < side; i++ {
 		<-done
 	}
+	fmt.Println()
 
 	f, err := os.Create("gifs/image.gif")
 	if err != nil {

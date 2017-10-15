@@ -1,23 +1,15 @@
 package sort
 
-import (
-	"github.com/invzhi/sorting-visualization/rgbah"
-)
-
-type Data struct {
-	Pixels []rgbah.RGBAH
-}
-
-func (d *Data) SelectionSort(frame, set, done chan bool) {
-	side := len(d.Pixels)
-	for i := 0; i < side; i++ {
+func SelectionSort(a []uint8, frame, set, done chan bool) {
+	l := len(a)
+	for i := 0; i < l; i++ {
 		minIndex := i
-		for j := i; j < side; j++ {
-			if d.Pixels[j].H < d.Pixels[minIndex].H {
+		for j := i; j < l; j++ {
+			if a[j] < a[minIndex] {
 				minIndex = j
 			}
 		}
-		d.Pixels[minIndex], d.Pixels[i] = d.Pixels[i], d.Pixels[minIndex]
+		a[minIndex], a[i] = a[i], a[minIndex]
 		frame <- true
 		<-set
 	}
