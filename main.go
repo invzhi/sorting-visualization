@@ -4,7 +4,6 @@ import (
 	"os"
 	"fmt"
 	"log"
-	// "time"
 	"image"
 	"image/gif"
 	"math/rand"
@@ -33,8 +32,6 @@ func main() {
 	images = append(images, img)
 	delays = append(delays, 0)
 
-	leftSide := side
-
 	frame := make(chan bool)
 	done := make(chan bool)
 	set := make(chan bool)
@@ -48,8 +45,7 @@ func main() {
 	go func() {
 		for a := 0; ; a++ {
 			img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
-			// time.Sleep(time.Second)
-			for i := 0; i < leftSide; i++ {
+			for i := 0; i < side; i++ {
 				<-frame
 			}
 			fmt.Println(a, "frame")
@@ -60,7 +56,7 @@ func main() {
 				}
 			}
 
-			for i := 0; i < leftSide; i++ {
+			for i := 0; i < side; i++ {
 				set <- true
 			}
 
@@ -69,10 +65,8 @@ func main() {
 		}
 	}()
 
-	for leftSide > 0 {
+	for i := 0; i < side; i++ {
 		<-done
-		fmt.Println("sorted.")
-		leftSide--
 	}
 
 	f, err := os.Create("gifs/image.gif")
@@ -83,6 +77,7 @@ func main() {
 	g := &gif.GIF{
 		Image: images,
 		Delay: delays,
+		Config: image.Config{palette, side, side},
 	}
 
 	if err := gif.EncodeAll(f, g); err != nil {
