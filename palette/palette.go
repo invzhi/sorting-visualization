@@ -6,7 +6,7 @@ func hueToRGBA(h int) color.RGBA {
 	var c color.RGBA
 
 	hi := h / 60
-	f := float64(h) / 60 - float64(hi)
+	f := float64(h)/60 - float64(hi)
 	q := 1 - f
 
 	switch hi {
