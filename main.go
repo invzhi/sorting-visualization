@@ -7,7 +7,7 @@ import (
 	"image"
 	"image/gif"
 	"math/rand"
-	"github.com/invzhi/sorting-visualization/rgbah"
+	"github.com/invzhi/sorting-visualization/palette"
 	"github.com/invzhi/sorting-visualization/sort"
 )
 
@@ -18,7 +18,7 @@ func main() {
 		delays []int
 	)
 	var ci [side][]uint8
-	palette := rgbah.GetPalette(side)
+	palette := palette.GetPalette(side)
 
 	img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
 	// shuffle
