@@ -1,92 +1,35 @@
 package main
 
 import (
-	"os"
 	"fmt"
-	"log"
-	"image"
-	"image/gif"
-	"math/rand"
-	"github.com/invzhi/sorting-visualization/palette"
+	"sync"
+	"runtime"
+	"github.com/invzhi/sorting-visualization/gif256"
 	"github.com/invzhi/sorting-visualization/sort"
 )
 
+const side = 256
+
 func main() {
-	const side = 256
-	var (
-		images []*image.Paletted
-		delays []int
-	)
-	var ci [side][]uint8
-	palette := palette.GetPalette(side)
+	var wg sync.WaitGroup
 
-	img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
-	// shuffle
+	numCPU := runtime.NumCPU()
+	sem := make(chan struct{}, numCPU)
+
+	g, cis := gif256.NewRandGIF(side, side)
+
+	wg.Add(side)
 	for y := 0; y < side; y++ {
-		ci[y] = make([]uint8, side)
-		for x, i := range rand.Perm(side) {
-			ci[y][x] = uint8(i)
-			img.SetColorIndex(x, y, uint8(i))
-		}
-	}
-	images = append(images, img)
-	delays = append(delays, 0)
-
-	frame := make(chan bool)
-	done := make(chan bool)
-	set := make(chan bool)
-
-	// sort
-	for y := 0; y < side; y++ {
-		go sort.SelectionSort(ci[y], frame, set, done)
-	}
-	
-	// set
-	go func() {
-		for {
-			img := image.NewPaletted(image.Rect(0, 0, side, side), palette)
-			for i := 0; i < side; i++ {
-				<-frame
-			}
-			fmt.Print(".")
-
-			for y := 0; y < side; y++ {
-				for x := 0; x < side; x++ {
-					img.SetColorIndex(x, y, ci[y][x])
-				}
-			}
-
-			for i := 0; i < side; i++ {
-				set <- true
-			}
-
-			images = append(images, img)
-			delays = append(delays, 0)
-		}
-	}()
-
-	for i := 0; i < side; i++ {
-		<-done
-	}
-	fmt.Println()
-
-	f, err := os.Create("gifs/image.gif")
-	if err != nil {
-		log.Fatal(err)
+		sem <- struct{}{}
+		go func(y int) {
+			defer wg.Done()
+			defer func() {<-sem}()
+			sort.SelectionSort(cis[y], y, g)
+		}(y)
+		fmt.Print(y, " ")
 	}
 
-	g := &gif.GIF{
-		Image: images,
-		Delay: delays,
-		Config: image.Config{palette, side, side},
-	}
-
-	if err := gif.EncodeAll(f, g); err != nil {
-		f.Close()
-		log.Fatal(err)
-	}
-
-	if err := f.Close(); err != nil {
-		log.Fatal(err)
-	}
+	wg.Wait()
+	gif256.EncodeGIF(g, "gifs/se.gif")
+	fmt.Println("Good")
 }

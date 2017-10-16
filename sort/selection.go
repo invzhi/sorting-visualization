@@ -1,7 +1,16 @@
 package sort
 
-func SelectionSort(a []uint8, frame, set, done chan bool) {
+import (
+	"image/gif"
+	"github.com/invzhi/sorting-visualization/gif256"
+)
+
+const side = 256
+
+func SelectionSort(a []uint8, y int, g *gif.GIF) {
+	frame := 1
 	l := len(a)
+
 	for i := 0; i < l; i++ {
 		minIndex := i
 		for j := i; j < l; j++ {
@@ -10,8 +19,8 @@ func SelectionSort(a []uint8, frame, set, done chan bool) {
 			}
 		}
 		a[minIndex], a[i] = a[i], a[minIndex]
-		frame <- true
-		<-set
+
+		gif256.SetLine(g, y, frame, a)
+		frame++
 	}
-	done <- true
 }
