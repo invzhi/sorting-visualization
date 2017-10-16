@@ -5,8 +5,6 @@ import (
 	"github.com/invzhi/sorting-visualization/gif256"
 )
 
-const side = 256
-
 func SelectionSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)
