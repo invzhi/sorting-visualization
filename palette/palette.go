@@ -2,6 +2,27 @@ package palette
 
 import "image/color"
 
+const round = 360
+
+var pal = make(color.Palette, round)
+
+func init() {
+	for hue := 0; hue < round; hue++ {
+		pal[hue] = hueToRGBA(hue)
+	}
+}
+
+func GetPalette(n int) color.Palette {
+	var colors color.Palette
+	if n > round {
+		// maybe log waring
+		colors = pal[:]
+	} else {
+		colors = pal[:n]
+	}
+	return colors
+}
+
 func hueToRGBA(h int) color.RGBA {
 	var c color.RGBA
 
@@ -37,13 +58,4 @@ func hueToRGBA(h int) color.RGBA {
 	}
 	c.A = 0xFF
 	return c
-}
-
-func GetPalette(n int) color.Palette {
-	colors := make(color.Palette, n)
-
-	for h := 0; h < n; h++ {
-		colors[h] = hueToRGBA(h % 360)
-	}
-	return colors
 }
