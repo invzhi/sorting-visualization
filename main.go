@@ -19,7 +19,7 @@ func sortHue(sortF func([]uint8, int, *gif.GIF), fn string, delay int) {
 
 	g, cis := gif256.NewRandGIF(side, side)
 
-	fmt.Print(fn, " (0-255): ")
+	fmt.Print(fn, ": ")
 	wg.Add(side)
 	for y := 0; y < side; y++ {
 		sem <- struct{}{}
@@ -28,12 +28,11 @@ func sortHue(sortF func([]uint8, int, *gif.GIF), fn string, delay int) {
 			defer func() { <-sem }()
 			sortF(cis[y], y, g)
 		}(y)
-		fmt.Print(y, ", ")
 	}
 
 	wg.Wait()
 	gif256.EncodeGIF(g, fn, delay)
-	fmt.Println("OK!")
+	fmt.Println(len(g.Delay), "frames generate success!")
 }
 
 func main() {
