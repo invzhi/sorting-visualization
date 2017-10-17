@@ -1,8 +1,8 @@
 package sort
 
 import (
-	"image/gif"
 	"github.com/invzhi/sorting-visualization/gif256"
+	"image/gif"
 )
 
 func SelectionSort(a []uint8, y int, g *gif.GIF) {
