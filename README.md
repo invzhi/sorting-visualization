@@ -9,3 +9,7 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 ## Insertion Sort
 
 ![Insertion Sort GIF](gifs/insertion.gif)
+
+## Shell Sort
+
+![Shell Sort GIF](gifs/shell.gif)
