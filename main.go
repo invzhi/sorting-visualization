@@ -40,4 +40,5 @@ func main() {
 	sortHue(sort.InsertionSort, "gifs/insertion.gif", 0)
 	sortHue(sort.ShellSort, "gifs/shell.gif", 0)
 	sortHue(sort.ShellSortOverview, "gifs/shell_overview.gif", 100)
+	sortHue(sort.MergeSort, "gifs/merge.gif", 100)
 }
