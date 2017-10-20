@@ -38,7 +38,6 @@ func sortHue(sortF func([]uint8, int, *gif.GIF), fn string, delay int) {
 func main() {
 	sortHue(sort.SelectionSort, "gifs/selection.gif", 0)
 	sortHue(sort.InsertionSort, "gifs/insertion.gif", 0)
-	sortHue(sort.ShellSort, "gifs/shell.gif", 0)
-	sortHue(sort.ShellSortOverview, "gifs/shell_overview.gif", 100)
+	sortHue(sort.ShellSort, "gifs/shell.gif", 100)
 	sortHue(sort.MergeSort, "gifs/merge.gif", 100)
 }
