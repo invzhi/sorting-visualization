@@ -40,7 +40,9 @@ func MergeSort(a []uint8, y int, g *gif.GIF) {
 			if l-1 < hi {
 				hi = l - 1
 			}
-			quickMerge(a[lo:hi+1], t[lo:hi+1], mid-lo)
+			if a[mid] > a[mid+1] {
+				quickMerge(a[lo:hi+1], t[lo:hi+1], mid-lo)
+			}
 		}
 
 		gif256.SetLine(g, y, frame, a)
