@@ -5,16 +5,18 @@ import (
 	"image/gif"
 )
 
-func quickMerge(a, t []uint8, lo, mid, hi int) {
+func quickMerge(a, t []uint8, mid int) {
+	l := len(a)
+
 	for i := 0; i <= mid; i++ {
 		t[i] = a[i]
 	}
-	for i := hi; i > mid; i-- {
-		t[i] = a[mid+1+hi-i]
+	for i := l - 1; i > mid; i-- {
+		t[i] = a[mid+l-i] // mid+l-i = mid+1 + l-1-i
 	}
 
-	i, j := lo, hi
-	for k := lo; k <= hi; k++ {
+	i, j := 0, l-1
+	for k := 0; k < l; k++ {
 		if t[i] < t[j] {
 			a[k] = t[i]
 			i++
@@ -27,19 +29,20 @@ func quickMerge(a, t []uint8, lo, mid, hi int) {
 
 func MergeSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
-	ll := len(a)
+	l := len(a)
 
-	t := make([]uint8, ll)
+	t := make([]uint8, l)
 	// bottom up
-	for l := 1; l < ll; l += l {
-		for lo := 0; lo < ll-l; lo += l + l {
-			mid := lo + l - 1
-			hi := mid + l
-			if ll-1 < hi {
-				hi = ll - 1
+	for blk := 1; blk < l; blk += blk {
+		for lo := 0; lo < l-blk; lo += blk + blk {
+			mid := lo + blk - 1
+			hi := mid + blk
+			if l-1 < hi {
+				hi = l - 1
 			}
-			quickMerge(a, t, lo, mid, hi)
+			quickMerge(a[lo:hi+1], t[lo:hi+1], mid-lo)
 		}
+
 		gif256.SetLine(g, y, frame, a)
 		frame++
 	}
