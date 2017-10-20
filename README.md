@@ -12,12 +12,6 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 
 ## Shell Sort
 
-### Overview
-
-![Shell Sort Overview GIF](gifs/shell_overview.gif)
-
-### Detail
-
 ![Shell Sort GIF](gifs/shell.gif)
 
 ## Merge Sort
