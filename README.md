@@ -17,3 +17,7 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 ## Merge Sort
 
 ![Merge Sort GIF](gifs/merge.gif)
+
+## Quick Sort
+
+![Quick Sort GIF](gifs/quick.gif)
