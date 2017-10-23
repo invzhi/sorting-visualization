@@ -18,11 +18,11 @@ var (
 func newFrame(g *gif.GIF) (img *image.Paletted) {
 	w, h := g.Config.Width, g.Config.Height
 	img = image.NewPaletted(image.Rect(0, 0, w, h), pal)
-	// for x := 0; x < w; x++ { // maybe once
-	// 	for y := 0; y < h; y++ {
-	// 		img.SetColorIndex(x, y, )
-	// 	}
-	// }
+	for x := 0; x < w; x++ { // TODO: maybe once
+		for y := 0; y < h; y++ {
+			img.SetColorIndex(x, y, uint8(x))
+		}
+	}
 	g.Image = append(g.Image, img)
 	return
 }
