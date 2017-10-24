@@ -32,7 +32,7 @@ func sortHue(sortF func([]uint8, int, *gif.GIF), fn string, delay int) {
 
 	wg.Wait()
 	gif256.EncodeGIF(g, fn, delay)
-	fmt.Println(len(g.Delay), "frames generate success!")
+	fmt.Printf("%v frames generate success!\n", len(g.Delay))
 }
 
 func main() {
@@ -40,4 +40,5 @@ func main() {
 	sortHue(sort.InsertionSort, "gifs/insertion.gif", 0)
 	sortHue(sort.ShellSort, "gifs/shell.gif", 100)
 	sortHue(sort.MergeSort, "gifs/merge.gif", 100)
+	sortHue(sort.QuickSort, "gifs/quick.gif", 0)
 }
