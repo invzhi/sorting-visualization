@@ -15,16 +15,18 @@ var (
 	m   sync.Mutex
 )
 
-func newFrame(g *gif.GIF) (img *image.Paletted) {
+func newFrame(g *gif.GIF) *image.Paletted {
 	w, h := g.Config.Width, g.Config.Height
-	img = image.NewPaletted(image.Rect(0, 0, w, h), pal)
-	for x := 0; x < w; x++ { // TODO: maybe once
-		for y := 0; y < h; y++ {
-			img.SetColorIndex(x, y, uint8(x))
-		}
+	l := w * h
+	r := image.Rect(0, 0, w, h)
+	pix := make([]uint8, l)
+
+	for i := 0; i < l; i++ {
+		pix[i] = uint8(i % 256)
 	}
+	img := &image.Paletted{pix, 1 * w, r, pal}
 	g.Image = append(g.Image, img)
-	return
+	return img
 }
 
 func NewRandGIF(h, w int) (*gif.GIF, [][]uint8) {
@@ -39,18 +41,19 @@ func NewRandGIF(h, w int) (*gif.GIF, [][]uint8) {
 	img := newFrame(g)
 	cis := make([][]uint8, h)
 
-	for y := 0; y < h; y++ {
+	for y, i := 0, 0; y < h; y++ {
 		cis[y] = make([]uint8, w)
-		for x, i := range rand.Perm(w) {
-			cis[y][x] = uint8(i)
-			// if i > 255, color index will overflow :P
-			img.SetColorIndex(x, y, uint8(i))
+		// if ci > 255, color index will overflow :P
+		for x, ci := range rand.Perm(w) {
+			cis[y][x] = uint8(ci)
+			img.Pix[i] = uint8(ci)
+			i++
 		}
 	}
 	return g, cis
 }
 
-func SetLine(g *gif.GIF, y int, frame int, line []uint8) {
+func SetLine(g *gif.GIF, y, frame int, line []uint8) {
 	var img *image.Paletted
 
 	m.Lock()
@@ -61,8 +64,9 @@ func SetLine(g *gif.GIF, y int, frame int, line []uint8) {
 	}
 	m.Unlock()
 
-	for x, _ := range line {
-		img.SetColorIndex(x, y, line[x])
+	b := img.PixOffset(0, y)
+	for x, ci := range line {
+		img.Pix[b+x] = ci
 	}
 }
 
