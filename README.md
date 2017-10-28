@@ -21,3 +21,7 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 ## Quick Sort
 
 ![Quick Sort GIF](gifs/quick.gif)
+
+## Heap Sort
+
+![Heap Sort GIF](gifs/heap.gif)
