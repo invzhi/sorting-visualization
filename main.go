@@ -42,4 +42,5 @@ func main() {
 	sortHue(sort.MergeSort, "gifs/merge.gif", 100)
 	sortHue(sort.QuickSort, "gifs/quick.gif", 0)
 	sortHue(sort.HeapSort, "gifs/heap.gif", 0)
+	sortHue(sort.BubbleSort, "gifs/bubble.gif", 0)
 }
