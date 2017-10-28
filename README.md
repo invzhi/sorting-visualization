@@ -6,6 +6,10 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 
 ![Selection Sort GIF](gifs/selection.gif)
 
+## Bubble Sort
+
+![Bubble Sort GIF](gifs/bubble.gif)
+
 ## Insertion Sort
 
 ![Insertion Sort GIF](gifs/insertion.gif)
