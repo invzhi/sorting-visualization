@@ -6,21 +6,28 @@ import (
 )
 
 func partition(a []uint8) int {
-	pivot, i := a[0], 1
-	head, tail := 0, len(a)-1
-	for i = 1; i <= tail; {
-		if a[i] > pivot {
-			a[i], a[tail] = a[tail], a[i]
-			tail--
-		} else {
-			// a[i], a[head] = a[head], a[i]
-			a[i], a[i-1] = a[i-1], a[i]
-			head++
+	l := len(a)
+	pivot := a[0]
+	i, j := 0, l
+
+	for {
+		for a[i+1] < pivot {
 			i++
+			if i+1 == l {
+				break;
+			}
 		}
+		for ; a[j-1] > pivot; j-- {
+		}
+		i++
+		j--
+		if i >= j {
+			break
+		}
+		a[i], a[j] = a[j], a[i]
 	}
-	// return head
-	return i - 1
+	a[0], a[j] = a[j], a[0]
+	return j
 }
 
 func quickSort(a, data []uint8, y int, frame *int, g *gif.GIF) {
