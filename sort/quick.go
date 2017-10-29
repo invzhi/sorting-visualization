@@ -14,7 +14,7 @@ func partition(a []uint8) int {
 		for a[i+1] < pivot {
 			i++
 			if i+1 == l {
-				break;
+				break
 			}
 		}
 		for ; a[j-1] > pivot; j-- {
