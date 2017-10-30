@@ -2,6 +2,11 @@
 
 Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainbow/RM3wl) on [Hacker News](https://news.ycombinator.com/item?id=15423202).
 
+More:
+
+- [Sorting Algorithms Visualized](https://imgur.com/a/voutF)
+- [Sorting Algorithms Revisualized](https://imgur.com/gallery/GD5gi)
+
 ## Selection Sort
 
 ![Selection Sort GIF](gifs/selection.gif)
