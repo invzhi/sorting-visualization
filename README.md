@@ -29,3 +29,7 @@ Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainb
 ## Heap Sort
 
 ![Heap Sort GIF](gifs/heap.gif)
+
+## Radix Sort
+
+![Radix Sort GIF](gifs/radix.gif)
