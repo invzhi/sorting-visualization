@@ -17,11 +17,10 @@ var (
 
 func newFrame(g *gif.GIF) *image.Paletted {
 	w, h := g.Config.Width, g.Config.Height
-	l := w * h
 	r := image.Rect(0, 0, w, h)
-	pix := make([]uint8, l)
+	pix := make([]uint8, w*h)
 
-	for i := 0; i < l; i++ {
+	for i, _ := range pix {
 		pix[i] = uint8(i % 256)
 	}
 	img := &image.Paletted{pix, 1 * w, r, pal}
@@ -41,13 +40,12 @@ func NewRandGIF(h, w int) (*gif.GIF, [][]uint8) {
 	img := newFrame(g)
 	cis := make([][]uint8, h)
 
-	for y, i := 0, 0; y < h; y++ {
+	for y := 0; y < h; y++ {
 		cis[y] = make([]uint8, w)
 		// if ci > 255, color index will overflow :P
 		for x, ci := range rand.Perm(w) {
 			cis[y][x] = uint8(ci)
-			img.Pix[i] = uint8(ci)
-			i++
+			img.Pix[y*w+x] = uint8(ci)
 		}
 	}
 	return g, cis
