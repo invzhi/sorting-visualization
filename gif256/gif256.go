@@ -69,11 +69,10 @@ func SetLine(g *gif.GIF, y, frame int, line []uint8) {
 }
 
 func setDelay(g *gif.GIF, delay int) {
-	l := len(g.Image)
-	g.Delay = make([]int, 0, l)
+	g.Delay = make([]int, len(g.Image))
 
-	for i := 0; i < l; i++ {
-		g.Delay = append(g.Delay, delay)
+	for i, _ := range g.Image {
+		g.Delay[i] = delay
 	}
 }
 
