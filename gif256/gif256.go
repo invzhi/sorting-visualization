@@ -20,8 +20,8 @@ func newFrame(g *gif.GIF) *image.Paletted {
 	r := image.Rect(0, 0, w, h)
 	pix := make([]uint8, w*h)
 
-	for i, _ := range pix {
-		pix[i] = uint8(i % 256)
+	for i := range pix {
+		pix[i] = uint8(i % w)
 	}
 	img := &image.Paletted{pix, 1 * w, r, pal}
 	g.Image = append(g.Image, img)
@@ -62,16 +62,17 @@ func SetLine(g *gif.GIF, y, frame int, line []uint8) {
 	}
 	m.Unlock()
 
-	b := img.PixOffset(0, y)
+	// left begin pixel
+	l := img.PixOffset(0, y)
 	for x, ci := range line {
-		img.Pix[b+x] = ci
+		img.Pix[l+x] = ci
 	}
 }
 
 func setDelay(g *gif.GIF, delay int) {
 	g.Delay = make([]int, len(g.Image))
 
-	for i, _ := range g.Image {
+	for i := range g.Image {
 		g.Delay[i] = delay
 	}
 }
