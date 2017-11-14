@@ -2,7 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/invzhi/sorting-visualization)](https://goreportcard.com/report/github.com/invzhi/sorting-visualization)
 
-Sorting visualization is inspired by [FishyMcFishFace](https://imgur.com/t/rainbow/RM3wl) on [Hacker News](https://news.ycombinator.com/item?id=15423202).
+Inspired by [FishyMcFishFace](https://imgur.com/t/rainbow/RM3wl) on [Hacker News](https://news.ycombinator.com/item?id=15423202).
 
 More:
 
