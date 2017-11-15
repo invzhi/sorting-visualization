@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func SelectionSort(a []uint8, y int, g *gif.GIF) {
@@ -19,7 +19,7 @@ func SelectionSort(a []uint8, y int, g *gif.GIF) {
 		}
 		a[minIndex], a[i] = a[i], a[minIndex]
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }

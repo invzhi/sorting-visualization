@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func BubbleSort(a []uint8, y int, g *gif.GIF) {
@@ -16,7 +16,7 @@ func BubbleSort(a []uint8, y int, g *gif.GIF) {
 				a[j], a[j-1] = a[j-1], a[j]
 			}
 		}
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }

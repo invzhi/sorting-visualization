@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func RadixSort(a []uint8, y int, g *gif.GIF) {
@@ -40,7 +40,7 @@ func RadixSort(a []uint8, y int, g *gif.GIF) {
 		}
 		exp *= BASE
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }

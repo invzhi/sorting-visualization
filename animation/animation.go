@@ -1,4 +1,4 @@
-package gif256
+package animation
 
 import (
 	"image"

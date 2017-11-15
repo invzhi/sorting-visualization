@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func quickMerge(a, t []uint8, mid int) {
@@ -46,7 +46,7 @@ func MergeSort(a []uint8, y int, g *gif.GIF) {
 			}
 		}
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }

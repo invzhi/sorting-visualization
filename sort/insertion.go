@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func InsertionSort(a []uint8, y int, g *gif.GIF) {
@@ -18,7 +18,7 @@ func InsertionSort(a []uint8, y int, g *gif.GIF) {
 		}
 		a[j] = t
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }

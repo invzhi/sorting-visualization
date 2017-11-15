@@ -4,7 +4,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func newGIF(sortf sorting, fn string, weight, height, delay int) {
@@ -12,7 +12,7 @@ func newGIF(sortf sorting, fn string, weight, height, delay int) {
 
 	sem := make(chan struct{}, numCPU)
 
-	g, cis := gif256.NewRandGIF(weight, height)
+	g, cis := animation.NewRandGIF(weight, height)
 
 	wg.Add(height)
 	log.Println(fn, "start generate")
@@ -27,6 +27,6 @@ func newGIF(sortf sorting, fn string, weight, height, delay int) {
 	}
 
 	wg.Wait()
-	gif256.EncodeGIF(g, fn, delay)
+	animation.EncodeGIF(g, fn, delay)
 	log.Printf("%s generate %v frames\n", fn, len(g.Delay))
 }

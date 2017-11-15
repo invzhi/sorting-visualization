@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func partition(a []uint8) int {
@@ -37,7 +37,7 @@ func quickSort(a, data []uint8, y int, frame *int, g *gif.GIF) {
 	}
 	p := partition(a)
 
-	gif256.SetLine(g, y, *frame, data)
+	animation.SetLine(g, y, *frame, data)
 	*frame = *frame + 1
 
 	quickSort(a[:p], data, y, frame, g)

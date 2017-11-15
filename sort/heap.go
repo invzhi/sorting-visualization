@@ -3,7 +3,7 @@ package sort
 import (
 	"image/gif"
 
-	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/animation"
 )
 
 func sink(a []uint8, f, b int) {
@@ -27,14 +27,14 @@ func HeapSort(a []uint8, y int, g *gif.GIF) {
 	for i := l/2 - 1; i >= 0; i-- {
 		sink(a, i, l)
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 	for i := l - 1; i > 0; i-- {
 		a[0], a[i] = a[i], a[0]
 		sink(a, 0, i)
 
-		gif256.SetLine(g, y, frame, a)
+		animation.SetLine(g, y, frame, a)
 		frame++
 	}
 }
