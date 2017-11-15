@@ -11,8 +11,11 @@ import (
 	"github.com/invzhi/sorting-visualization/palette"
 )
 
+// GIF allow only 256 colors
+const limit = 256
+
 var (
-	pal = palette.GetPalette(256)
+	pal = palette.GetPalette(limit)
 	m   sync.Mutex
 )
 
@@ -21,9 +24,24 @@ func newFrame(g *gif.GIF) *image.Paletted {
 	r := image.Rect(0, 0, w, h)
 	pix := make([]uint8, w*h)
 
-	for i := range pix {
-		pix[i] = uint8(i % w)
+	// make hue ordered finally
+	x, a, b := 0, w/limit, w%limit
+	for i := 0; i < limit; i++ {
+		for j := 0; j < a; j++ {
+			pix[x] = uint8(i)
+			x++
+		}
+		if i < b {
+			pix[x] = uint8(i)
+			x++
+		}
 	}
+	for i := 1; i < h; i++ {
+		for j := 0; j < w; j++ {
+			pix[i*w+j] = pix[j]
+		}
+	}
+
 	img := &image.Paletted{pix, 1 * w, r, pal}
 	g.Image = append(g.Image, img)
 	return img
