@@ -1,13 +1,14 @@
 package gif256
 
 import (
-	"github.com/invzhi/sorting-visualization/palette"
 	"image"
 	"image/gif"
 	"log"
 	"math/rand"
 	"os"
 	"sync"
+
+	"github.com/invzhi/sorting-visualization/palette"
 )
 
 var (

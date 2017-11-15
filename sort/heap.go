@@ -1,8 +1,9 @@
 package sort
 
 import (
-	"github.com/invzhi/sorting-visualization/gif256"
 	"image/gif"
+
+	"github.com/invzhi/sorting-visualization/gif256"
 )
 
 func sink(a []uint8, f, b int) {

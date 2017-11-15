@@ -1,8 +1,9 @@
 package sort
 
 import (
-	"github.com/invzhi/sorting-visualization/gif256"
 	"image/gif"
+
+	"github.com/invzhi/sorting-visualization/gif256"
 )
 
 func InsertionSort(a []uint8, y int, g *gif.GIF) {

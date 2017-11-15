@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/invzhi/sorting-visualization/gif256"
-	"github.com/invzhi/sorting-visualization/sort"
 	"image/gif"
 	"runtime"
 	"sync"
+
+	"github.com/invzhi/sorting-visualization/gif256"
+	"github.com/invzhi/sorting-visualization/sort"
 )
 
 const side = 256
