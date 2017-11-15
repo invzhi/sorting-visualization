@@ -1,48 +1,94 @@
 package main
 
 import (
-	"fmt"
+	"flag"
 	"image/gif"
+	"log"
 	"runtime"
-	"sync"
+	"strings"
 
-	"github.com/invzhi/sorting-visualization/gif256"
 	"github.com/invzhi/sorting-visualization/sort"
 )
 
-const side = 256
+type sorting func([]uint8, int, *gif.GIF)
 
-func sortHue(sortF func([]uint8, int, *gif.GIF), fn string, delay int) {
-	var wg sync.WaitGroup
+const (
+	minWeight = 5
+)
 
-	numCPU := runtime.NumCPU()
-	sem := make(chan struct{}, numCPU)
+var (
+	numCPU int
 
-	g, cis := gif256.NewRandGIF(side, side)
+	sortName, filename    string
+	weight, height, delay int
 
-	fmt.Print(fn, ": ")
-	wg.Add(side)
-	for y := 0; y < side; y++ {
-		sem <- struct{}{}
-		go func(y int) {
-			defer wg.Done()
-			defer func() { <-sem }()
-			sortF(cis[y], y, g)
-		}(y)
+	m = map[string]sorting{
+		"selection": sort.SelectionSort,
+		"insertion": sort.InsertionSort,
+		"shell":     sort.ShellSort,
+		"merge":     sort.MergeSort,
+		"quick":     sort.QuickSort,
+		"heap":      sort.HeapSort,
+		"bubble":    sort.BubbleSort,
+		"radix":     sort.RadixSort,
 	}
+)
 
-	wg.Wait()
-	gif256.EncodeGIF(g, fn, delay)
-	fmt.Printf("%v frames generate success!\n", len(g.Delay))
+func init() {
+	numCPU = runtime.NumCPU()
+
+	const (
+		defaultWeight = 256
+		defaultHeight = 256
+		defaultDelay  = 10
+
+		sortUsage  = "selection, insertion, shell, merge, quick, bubble, radix, all"
+		delayUsage = "successive delay times, one per frame, in 100ths of a second"
+	)
+	flag.StringVar(&sortName, "sorting", "", sortUsage)
+	flag.StringVar(&filename, "filename", "", "GIF's filename (default: sorting name)")
+
+	flag.IntVar(&weight, "weight", defaultWeight, "GIF's weight")
+	flag.IntVar(&height, "height", defaultHeight, "GIF's height")
+	flag.IntVar(&delay, "delay", defaultDelay, delayUsage)
 }
 
 func main() {
-	sortHue(sort.SelectionSort, "gifs/selection.gif", 0)
-	sortHue(sort.InsertionSort, "gifs/insertion.gif", 0)
-	sortHue(sort.ShellSort, "gifs/shell.gif", 100)
-	sortHue(sort.MergeSort, "gifs/merge.gif", 100)
-	sortHue(sort.QuickSort, "gifs/quick.gif", 0)
-	sortHue(sort.HeapSort, "gifs/heap.gif", 0)
-	sortHue(sort.BubbleSort, "gifs/bubble.gif", 0)
-	sortHue(sort.RadixSort, "gifs/radix.gif", 100)
+	flag.Parse()
+
+	sortf, isexist := m[sortName]
+	if isexist == false && sortName != "all" {
+		log.Fatalln("sorting is not existed:", sortName)
+	}
+
+	// filename
+	if filename == "" {
+		filename = sortName
+	}
+	if strings.HasSuffix(filename, ".gif") == false {
+		filename += ".gif"
+	}
+
+	// weight, height
+	if weight < minWeight {
+		log.Fatalln("weight can not less than", minWeight)
+	}
+	if height <= 0 {
+		log.Fatalln("height can not less than 1")
+	}
+
+	// delay
+	if delay < 0 {
+		log.Fatalln("delay can not less than 0")
+	}
+
+	// if sorting name is "all", generate all GIF
+	if sortName != "all" {
+		newGIF(sortf, filename, weight, height, delay)
+	} else {
+		// no matter about filename
+		for name, sortf := range m {
+			newGIF(sortf, name+".gif", weight, height, delay)
+		}
+	}
 }

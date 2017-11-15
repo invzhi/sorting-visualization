@@ -29,7 +29,7 @@ func newFrame(g *gif.GIF) *image.Paletted {
 	return img
 }
 
-func NewRandGIF(h, w int) (*gif.GIF, [][]uint8) {
+func NewRandGIF(w, h int) (*gif.GIF, [][]uint8) {
 	g := &gif.GIF{
 		Image: make([]*image.Paletted, 0),
 		Config: image.Config{
