@@ -2,6 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/invzhi/sorting-visualization?status.svg)](https://godoc.org/github.com/invzhi/sorting-visualization)
 [![Go Report Card](https://goreportcard.com/badge/github.com/invzhi/sorting-visualization)](https://goreportcard.com/report/github.com/invzhi/sorting-visualization)
+[![license](https://img.shields.io/github/license/invzhi/sorting-visualization.svg)]()
 
 Inspired by [FishyMcFishFace](https://imgur.com/t/rainbow/RM3wl) on [Hacker News](https://news.ycombinator.com/item?id=15423202).
 
