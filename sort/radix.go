@@ -6,6 +6,7 @@ import (
 	"github.com/invzhi/sorting-visualization/animation"
 )
 
+// RadixSort will record a frame for every radix sort.
 func RadixSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

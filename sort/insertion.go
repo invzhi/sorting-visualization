@@ -6,6 +6,7 @@ import (
 	"github.com/invzhi/sorting-visualization/animation"
 )
 
+// InsertionSort will record a frame every insertion.
 func InsertionSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

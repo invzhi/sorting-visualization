@@ -6,6 +6,7 @@ import (
 	"github.com/invzhi/sorting-visualization/animation"
 )
 
+// ShellSort will record a frame for every h-insertion sort.
 func ShellSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

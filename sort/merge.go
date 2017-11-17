@@ -28,6 +28,7 @@ func quickMerge(a, t []uint8, mid int) {
 	}
 }
 
+// MergeSort will record a frame for every merge operation.
 func MergeSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

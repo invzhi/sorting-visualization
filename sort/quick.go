@@ -44,6 +44,7 @@ func quickSort(a, data []uint8, y int, frame *int, g *gif.GIF) {
 	quickSort(a[p+1:], data, y, frame, g)
 }
 
+// QuickSort will record a frame for every partition.
 func QuickSort(a []uint8, y int, g *gif.GIF) {
 	data := a
 	frame := 1

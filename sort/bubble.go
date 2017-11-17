@@ -6,6 +6,7 @@ import (
 	"github.com/invzhi/sorting-visualization/animation"
 )
 
+// BubbleSort will record a frame for every bubble operation.
 func BubbleSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

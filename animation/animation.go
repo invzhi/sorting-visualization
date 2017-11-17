@@ -52,6 +52,7 @@ func newFrame(g *gif.GIF) *image.Paletted {
 	return img
 }
 
+// NewRandGIF return a new GIF with one random frame and its color indexs.
 func NewRandGIF(w, h int) (*gif.GIF, [][]uint8) {
 	g := &gif.GIF{
 		Image: make([]*image.Paletted, 0),
@@ -75,6 +76,7 @@ func NewRandGIF(w, h int) (*gif.GIF, [][]uint8) {
 	return g, cis
 }
 
+// SetLine will set a line's color index to GIF on a specific frame.
 func SetLine(g *gif.GIF, y, frame int, line []uint8) {
 	var img *image.Paletted
 
@@ -101,6 +103,7 @@ func setDelay(g *gif.GIF, delay int) {
 	}
 }
 
+// EncodeGIF set delay time and encode to specific filename.
 func EncodeGIF(g *gif.GIF, fn string, delay int) {
 	f, err := os.Create(fn)
 	if err != nil {

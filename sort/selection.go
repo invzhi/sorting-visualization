@@ -6,6 +6,7 @@ import (
 	"github.com/invzhi/sorting-visualization/animation"
 )
 
+// SelectionSort will record a frame for every selection.
 func SelectionSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

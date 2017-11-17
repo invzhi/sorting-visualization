@@ -20,6 +20,7 @@ func sink(a []uint8, f, b int) {
 	}
 }
 
+// HeapSort will record a frame for every sink operation.
 func HeapSort(a []uint8, y int, g *gif.GIF) {
 	frame := 1
 	l := len(a)

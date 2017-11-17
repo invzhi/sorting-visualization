@@ -12,10 +12,10 @@ func init() {
 	}
 }
 
+// GetPalette return palette, hue is between 0 to n-1.
 func GetPalette(n int) color.Palette {
 	var colors color.Palette
 	if n > round {
-		// maybe log waring
 		colors = pal[:]
 	} else {
 		colors = pal[:n]
