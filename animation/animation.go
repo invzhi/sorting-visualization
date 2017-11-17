@@ -42,7 +42,12 @@ func newFrame(g *gif.GIF) *image.Paletted {
 		}
 	}
 
-	img := &image.Paletted{pix, 1 * w, r, pal}
+	img := &image.Paletted{
+		Pix:     pix,
+		stride:  1 * w,
+		Rect:    r,
+		Palette: pal,
+	}
 	g.Image = append(g.Image, img)
 	return img
 }
