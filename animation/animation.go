@@ -44,7 +44,7 @@ func newFrame(g *gif.GIF) *image.Paletted {
 
 	img := &image.Paletted{
 		Pix:     pix,
-		stride:  1 * w,
+		Stride:  1 * w,
 		Rect:    r,
 		Palette: pal,
 	}
