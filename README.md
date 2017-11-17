@@ -11,34 +11,43 @@ More:
 - [Sorting Algorithms Visualized](https://imgur.com/a/voutF)
 - [Sorting Algorithms Revisualized](https://imgur.com/gallery/GD5gi)
 
-## Selection Sort
+## Usage
+```
+Usage of ./sorting-visualization:
+  -delay int
+    	successive delay times, one per frame, in 100ths of a second (default 10)
+  -filename string
+    	GIF's filename (default: sorting name)
+  -height int
+    	GIF's height (default 256)
+  -sorting string
+    	selection, insertion, shell, merge, quick, bubble, radix, all
+  -weight int
+    	GIF's weight (default 256)
+```
 
+## GIFs
+
+### Selection Sort
 ![Selection Sort GIF](gifs/selection.gif)
 
-## Bubble Sort
-
+### Bubble Sort
 ![Bubble Sort GIF](gifs/bubble.gif)
 
-## Insertion Sort
-
+### Insertion Sort
 ![Insertion Sort GIF](gifs/insertion.gif)
 
-## Shell Sort
-
+### Shell Sort
 ![Shell Sort GIF](gifs/shell.gif)
 
-## Merge Sort
-
+### Merge Sort
 ![Merge Sort GIF](gifs/merge.gif)
 
-## Quick Sort
-
+### Quick Sort
 ![Quick Sort GIF](gifs/quick.gif)
 
-## Heap Sort
-
+### Heap Sort
 ![Heap Sort GIF](gifs/heap.gif)
 
-## Radix Sort
-
+### Radix Sort
 ![Radix Sort GIF](gifs/radix.gif)
