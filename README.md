@@ -10,6 +10,8 @@ More:
 
 - [Sorting Algorithms Visualized](https://imgur.com/a/voutF)
 - [Sorting Algorithms Revisualized](https://imgur.com/gallery/GD5gi)
+- [How I Visualized Sorting Algorithms and Brought Them to Life with Sound
+](https://medium.freecodecamp.org/how-i-visualized-the-sorting-algorithms-and-brought-them-to-life-with-sound-ce7c5c6cb6ef)
 
 ## Usage
 ```
